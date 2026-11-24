@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  /* Custom scrollbar that fits the dark theme */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0d0d0f;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #2a2a35;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #3a3a4a;
+  }
+}
+
+@layer components {
+  .diff-add {
+    @apply bg-green-500/10 border-l-2 border-green-500 text-green-300;
+  }
+  .diff-remove {
+    @apply bg-red-500/10 border-l-2 border-red-500 text-red-300;
+  }
+  .diff-context {
+    @apply text-gray-500;
+  }
+}
