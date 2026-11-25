@@ -22,7 +22,7 @@ os.environ.setdefault("SECRET_KEY", "test-secret-key")
 os.environ.setdefault("LOG_LEVEL", "ERROR")
 
 # Import after env vars are set so pydantic-settings picks them up
-from app.core.config import get_settings  # noqa: E402
+from app.core.config import get_settings
 
 get_settings.cache_clear()
 

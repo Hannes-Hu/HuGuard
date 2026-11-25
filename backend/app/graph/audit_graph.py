@@ -171,7 +171,7 @@ async def get_graph() -> Any:
     We explicitly open and manage an aiosqlite connection to prevent the
     underlying connection worker thread from being re-entered / restarted.
     """
-    global _compiled_graph, _saver, _conn  # noqa: PLW0603
+    global _compiled_graph, _saver, _conn
 
     if _compiled_graph is not None:
         return _compiled_graph
@@ -200,7 +200,7 @@ async def get_graph() -> Any:
 
 async def close_graph() -> None:
     """Close the underlying aiosqlite connection on shutdown."""
-    global _conn, _compiled_graph, _saver  # noqa: PLW0603
+    global _conn, _compiled_graph, _saver
     if _conn is not None:
         await _conn.close()
         _conn = None

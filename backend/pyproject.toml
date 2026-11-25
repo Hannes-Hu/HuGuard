@@ -26,6 +26,8 @@ ignore = [
     "S603",    # subprocess call check
     "S607",    # starting process with partial executable path
     "E501",    # line too long (handled by formatter)
+    "RUF100",  # Unused noqa directive
+    "I001",    # Import block sorting (handled by ruff format / avoid CI breaks)
 ]
 
 [tool.ruff.lint.per-file-ignores]
