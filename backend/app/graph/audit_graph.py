@@ -16,13 +16,12 @@ Architecture decisions:
 
 from __future__ import annotations
 
-import asyncio
 from collections.abc import AsyncGenerator
 from pathlib import Path
 from typing import Any
 
-import structlog
 import aiosqlite
+import structlog
 from langgraph.checkpoint.sqlite.aio import AsyncSqliteSaver
 from langgraph.graph import END, StateGraph
 
@@ -35,7 +34,6 @@ from app.schemas.audit import (
     ApprovalDecision,
     AuditState,
     AuditStatus,
-    CriticVerdict,
     SSEEvent,
     SSEEventType,
 )

@@ -35,13 +35,7 @@ _JS_LANGUAGE = Language(tsjavascript.language())
 
 
 def _get_parser(language: str) -> Parser:
-    lang_map = {
-        "python": _PY_LANGUAGE,
-        "javascript": _JS_LANGUAGE,
-        "typescript": _JS_LANGUAGE,  # ts grammar is a superset of js for our purposes
-    }
-    parser = Parser(_get_language(language))
-    return parser
+    return Parser(_get_language(language))
 
 
 def _get_language(language: str) -> Language:
@@ -100,7 +94,7 @@ def _estimate_complexity(node: Node) -> int:
     branch_types = {
         "if_statement", "elif_clause", "for_statement", "while_statement",
         "try_statement", "except_clause", "with_statement",
-        "if_statement", "switch_statement", "catch_clause",
+        "switch_statement", "catch_clause",
         "conditional_expression", "ternary_expression",
     }
     count = 1  # baseline

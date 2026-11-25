@@ -22,7 +22,6 @@ from app.schemas.audit import (
     AuditStatus,
     ScannerOutput,
     SecurityFinding,
-    Severity,
 )
 
 log = structlog.get_logger(__name__)

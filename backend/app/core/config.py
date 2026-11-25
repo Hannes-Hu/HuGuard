@@ -10,8 +10,11 @@ Using pydantic-settings instead of raw os.environ gives us:
 from functools import lru_cache
 from pathlib import Path
 
+import structlog
 from pydantic import Field, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+log = structlog.get_logger(__name__)
 
 
 class Settings(BaseSettings):
@@ -51,8 +54,8 @@ class Settings(BaseSettings):
                     parsed = json.loads(clean_v)
                     if isinstance(parsed, list):
                         return [str(origin).strip() for origin in parsed if str(origin).strip()]
-                except Exception:
-                    pass
+                except Exception as exc:
+                    log.debug("Failed to parse cors_origins as JSON array", error=str(exc))
             return [origin.strip() for origin in clean_v.split(",") if origin.strip()]
         return v
 

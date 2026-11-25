@@ -1,6 +1,9 @@
 [tool.ruff]
 target-version = "py311"
 line-length = 100
+exclude = ["alembic/"]
+
+[tool.ruff.lint]
 select = [
     "E",   # pycodestyle errors
     "W",   # pycodestyle warnings
@@ -10,25 +13,25 @@ select = [
     "C4",  # flake8-comprehensions
     "UP",  # pyupgrade
     "S",   # flake8-bandit (security)
-    "N",   # pep8-naming
-    "ANN", # flake8-annotations (type hints)
-    "TCH", # flake8-type-checking
     "RUF", # Ruff-specific rules
 ]
 ignore = [
-    "ANN101",  # Missing type for self
-    "ANN102",  # Missing type for cls
     "S101",    # Use of assert (fine in tests)
     "B008",    # Do not perform function calls in argument defaults (FastAPI Depends)
     "RUF012",  # Mutable class attributes (Pydantic models)
+    "RUF001",  # Ambiguous unicode characters in string
+    "RUF002",  # Ambiguous unicode characters in docstring
+    "RUF003",  # Ambiguous unicode characters in comment
+    "S104",    # Possible binding to all interfaces (0.0.0.0 is intended in Docker)
+    "S603",    # subprocess call check
+    "S607",    # starting process with partial executable path
+    "E501",    # line too long (handled by formatter)
 ]
-exclude = ["tests/", "alembic/"]
 
-[tool.ruff.per-file-ignores]
-"tests/**/*.py" = ["ANN", "S"]
-"app/main.py" = ["ANN"]
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = ["S"]
 
-[tool.ruff.isort]
+[tool.ruff.lint.isort]
 known-first-party = ["app"]
 
 [tool.pytest.ini_options]

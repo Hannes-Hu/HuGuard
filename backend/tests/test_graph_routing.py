@@ -10,11 +10,7 @@ the graph routing decisions in isolation from LLM behaviour.
 
 from __future__ import annotations
 
-import json
-from unittest.mock import AsyncMock, MagicMock, patch
-
-import pytest
-
+from app.agents.critic import _build_state_after_critic
 from app.schemas.audit import (
     AgentNode,
     ApprovalDecision,
@@ -29,7 +25,6 @@ from app.schemas.audit import (
     Severity,
     UnifiedDiff,
 )
-from app.agents.critic import _build_state_after_critic
 
 
 def _make_full_state_with_patch(verdict: CriticVerdict, retry_count: int = 0) -> AuditState:
@@ -115,8 +110,8 @@ class TestCyclicRouting:
         When the retry budget is exhausted, the graph must terminate gracefully
         instead of looping forever. max_patch_retries defaults to 2 in settings.
         """
-        import structlog
         from app.core.config import get_settings
+        import structlog
 
         max_retries = get_settings().max_patch_retries
         # Set retry_count to max so the next rejection exhausts the budget

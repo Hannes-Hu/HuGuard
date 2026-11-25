@@ -6,7 +6,9 @@ from __future__ import annotations
 
 import io
 import zipfile
+
 import pytest
+
 from app.services.ingestion import _detect_language, _extract_from_zip
 
 

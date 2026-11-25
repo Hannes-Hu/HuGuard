@@ -6,7 +6,7 @@ from __future__ import annotations
 
 import json
 from unittest.mock import MagicMock, patch
-import pytest
+
 from langchain_core.messages import AIMessage
 
 from app.agents.patcher import run_patcher_node

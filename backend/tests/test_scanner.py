@@ -7,7 +7,6 @@ The tests verify schema validation, fallback behaviour, and state transitions.
 
 from __future__ import annotations
 
-import json
 from unittest.mock import MagicMock, patch
 
 import pytest

@@ -12,14 +12,12 @@ from __future__ import annotations
 
 import json
 import uuid
-from datetime import datetime
 from typing import Annotated
 
 import structlog
-from fastapi import APIRouter, File, Form, HTTPException, Query, UploadFile, status
+from fastapi import APIRouter, File, HTTPException, Query, UploadFile, status
 from fastapi.responses import StreamingResponse
 
-from app.core.config import get_settings
 from app.graph.audit_graph import resume_after_approval, stream_audit
 from app.schemas.audit import (
     ApprovalRequest,
@@ -31,7 +29,6 @@ from app.schemas.audit import (
     SSEEvent,
     SSEEventType,
 )
-from app.services.ingestion import extract_source_from_file
 
 log = structlog.get_logger(__name__)
 router = APIRouter(prefix="/api/v1/audit", tags=["audit"])
@@ -152,8 +149,8 @@ async def approve_patch(thread_id: str, body: ApprovalRequest) -> AuditSummaryRe
     except ValueError as exc:
         error_msg = str(exc)
         if "No checkpoint" in error_msg:
-            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=error_msg)
-        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail=error_msg)
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=error_msg) from exc
+        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail=error_msg) from exc
 
     return _state_to_summary(final_state)
 

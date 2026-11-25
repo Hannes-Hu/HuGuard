@@ -9,11 +9,9 @@ is running on the developer's machine.
 from __future__ import annotations
 
 import os
-from collections.abc import Generator
-from unittest.mock import AsyncMock, MagicMock, patch
+from unittest.mock import MagicMock, patch
 
 import pytest
-from fastapi.testclient import TestClient
 from langchain_core.messages import AIMessage
 
 # Point tests at a fresh in-memory SQLite DB to avoid polluting the dev DB

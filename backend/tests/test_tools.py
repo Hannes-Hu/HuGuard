@@ -6,10 +6,8 @@ These tests run fully deterministically without any LLM or network access.
 
 from __future__ import annotations
 
-import pytest
-
-from app.tools.code_analysis import analyse_code, validate_python_syntax
 from app.schemas.audit import Severity
+from app.tools.code_analysis import analyse_code, validate_python_syntax
 
 
 VULNERABLE_CODE = '''

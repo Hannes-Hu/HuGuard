@@ -7,8 +7,8 @@ This file owns: lifespan (startup/shutdown), middleware, and global exception ha
 
 from __future__ import annotations
 
+from collections.abc import AsyncGenerator
 from contextlib import asynccontextmanager
-from typing import AsyncGenerator
 
 import structlog
 import uvicorn
