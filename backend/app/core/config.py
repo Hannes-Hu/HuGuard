@@ -37,7 +37,7 @@ class Settings(BaseSettings):
     database_url: str = Field(default="sqlite+aiosqlite:///./data/huguard.db")
 
     # ── API ───────────────────────────────────────────────────────────────────
-    api_host: str = Field(default="0.0.0.0")
+    api_host: str = Field(default="0.0.0.0")  # nosec B104 – intentional: Docker controls host-level exposure
     api_port: int = Field(default=8000)
     # Accepts comma-separated list or JSON array: "http://localhost:3000,http://..."
     cors_origins: str | list[str] = Field(default="http://localhost:3000")
