@@ -13,6 +13,7 @@ import json
 import subprocess
 import tempfile
 from pathlib import Path
+from typing import Any
 
 import structlog
 import tree_sitter_python as tspython
@@ -126,7 +127,7 @@ def _run_ruff(source_code: str, filename: str) -> list[StaticFinding]:
             timeout=30,
         )
         if result.stdout:
-            raw: list[dict[str, object]] = json.loads(result.stdout)
+            raw: list[Any] = json.loads(result.stdout)
             for item in raw:
                 rule_id = item.get("code") or "unknown"
                 findings.append(

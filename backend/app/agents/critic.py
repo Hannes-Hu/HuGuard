@@ -100,7 +100,8 @@ def run_critic_node(state: AuditState) -> AuditState:
 
     patched_code = state.patcher_output.diff.patched_snippet
 
-    # Phase 1: cheap deterministic check
+    # Phase 1: cheap deterministic check – declare here so mypy sees one unified type across both branches
+    critic_output: CriticOutput | None = None
     syntax_valid, syntax_error = validate_python_syntax(patched_code)
     if not syntax_valid:
         logger.warning("Patch failed syntax check, rejecting immediately", error=syntax_error)
@@ -112,8 +113,7 @@ def run_critic_node(state: AuditState) -> AuditState:
         )
         return _build_state_after_critic(state, critic_output, logger)
 
-    # Phase 2: LLM semantic review – declare before assignment so mypy can see the type uniformly
-    critic_output: CriticOutput | None = None
+    # Phase 2: LLM semantic review
     llm = ChatOllama(
         base_url=settings.ollama_base_url,
         model=settings.ollama_model,
