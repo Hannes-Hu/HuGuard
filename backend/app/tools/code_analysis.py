@@ -126,7 +126,7 @@ def _run_ruff(source_code: str, filename: str) -> list[StaticFinding]:
             timeout=30,
         )
         if result.stdout:
-            raw: list[dict] = json.loads(result.stdout)
+            raw: list[dict[str, object]] = json.loads(result.stdout)
             for item in raw:
                 rule_id = item.get("code") or "unknown"
                 findings.append(

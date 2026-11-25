@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import json
 import uuid
+from collections.abc import AsyncGenerator
 from typing import Annotated
 
 import structlog
@@ -100,7 +101,7 @@ async def stream_audit_events(
         status=AuditStatus.PENDING,
     )
 
-    async def event_generator():
+    async def event_generator() -> AsyncGenerator[str, None]:
         try:
             async for event in stream_audit(thread_id, initial_state):
                 yield _format_sse(event)

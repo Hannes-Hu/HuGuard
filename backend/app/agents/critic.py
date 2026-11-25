@@ -112,7 +112,8 @@ def run_critic_node(state: AuditState) -> AuditState:
         )
         return _build_state_after_critic(state, critic_output, logger)
 
-    # Phase 2: LLM semantic review
+    # Phase 2: LLM semantic review – declare before assignment so mypy can see the type uniformly
+    critic_output: CriticOutput | None = None
     llm = ChatOllama(
         base_url=settings.ollama_base_url,
         model=settings.ollama_model,
@@ -123,8 +124,6 @@ def run_critic_node(state: AuditState) -> AuditState:
 
     prompt = _build_critic_prompt(state)
     messages = [SystemMessage(content=_SYSTEM_PROMPT), HumanMessage(content=prompt)]
-
-    critic_output: CriticOutput | None = None
 
     for attempt in range(1, 3):
         try:
